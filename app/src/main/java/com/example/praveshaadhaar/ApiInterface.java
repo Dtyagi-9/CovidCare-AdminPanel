@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
-    @GET("ratings")
+    @GET("/getratings")
     Call<List<RatingModel>>getratingJson();
 
     @POST("addratings")

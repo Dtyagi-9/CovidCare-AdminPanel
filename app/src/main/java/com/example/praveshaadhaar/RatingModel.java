@@ -4,25 +4,13 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class RatingModel {
-    @SerializedName("shop_name")
-    @Expose
-    private String shopName;
-    @SerializedName("shop_address")
-    @Expose
-    private String shopAddress;
-    @SerializedName("shop_sanitation")
-    @Expose
-    private String shopSanitation;
-    @SerializedName("mask_use")
-    @Expose
-    private String maskUse;
-    @SerializedName("social_distancing")
-    @Expose
-    private String socialDistancing;
-    @SerializedName("Recommeded")
-    @Expose
-    private String recommeded;
 
+    private String shop_name;
+    private String shop_address;
+    private String shop_sanitization;
+    private String mask_use;
+    private String social_distancing;
+    private String recommended;
     private boolean expanded;
 
     public RatingModel(boolean expanded) {
@@ -37,51 +25,51 @@ public class RatingModel {
         this.expanded = expanded;
     }
 
-    public String getShopName() {
-        return shopName;
+    public String getShop_name() {
+        return shop_name;
     }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
+    public void setShop_name(String shop_name) {
+        this.shop_name = shop_name;
     }
 
-    public String getShopAddress() {
-        return shopAddress;
+    public String getShop_address() {
+        return shop_address;
     }
 
-    public void setShopAddress(String shopAddress) {
-        this.shopAddress = shopAddress;
+    public void setShop_address(String shop_address) {
+        this.shop_address = shop_address;
     }
 
-    public String getShopSanitation() {
-        return shopSanitation;
+    public String getShop_sanitization() {
+        return shop_sanitization;
     }
 
-    public void setShopSanitation(String shopSanitation) {
-        this.shopSanitation = shopSanitation;
+    public void setShop_sanitization(String shop_sanitization) {
+        this.shop_sanitization = shop_sanitization;
     }
 
-    public String getMaskUse() {
-        return maskUse;
+    public String getMask_use() {
+        return mask_use;
     }
 
-    public void setMaskUse(String maskUse) {
-        this.maskUse = maskUse;
+    public void setMask_use(String mask_use) {
+        this.mask_use = mask_use;
     }
 
-    public String getSocialDistancing() {
-        return socialDistancing;
+    public String getSocial_distancing() {
+        return social_distancing;
     }
 
-    public void setSocialDistancing(String socialDistancing) {
-        this.socialDistancing = socialDistancing;
+    public void setSocial_distancing(String social_distancing) {
+        this.social_distancing = social_distancing;
     }
 
-    public String getRecommeded() {
-        return recommeded;
+    public String getRecommended() {
+        return recommended;
     }
 
-    public void setRecommeded(String recommeded) {
-        this.recommeded = recommeded;
+    public void setRecommended(String recommended) {
+        this.recommended = recommended;
     }
 }

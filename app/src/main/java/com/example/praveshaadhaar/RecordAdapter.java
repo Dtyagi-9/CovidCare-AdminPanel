@@ -31,7 +31,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         RecordAdapter.ViewHolderClass viewHolderClass = (RecordAdapter.ViewHolderClass)holder;
         FetchData fetchData = fetchDataList.get(position);
         viewHolderClass.nomask.setText("No Mask : "+fetchData.getNoMask());
-        viewHolderClass.mask.setText("Worn Mask : "+fetchData.getMask());
+        viewHolderClass.mask.setText("With Mask : "+fetchData.getMask());
         viewHolderClass.camno.setText("Camera : "+fetchData.getCamNo() );
     }
     @Override

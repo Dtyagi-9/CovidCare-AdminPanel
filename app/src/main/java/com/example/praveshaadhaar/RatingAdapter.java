@@ -36,11 +36,11 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RatingAdapter.ViewHolder holder, int position) {
-        holder.shopName.setText(ratingModelList.get(position).getShopName());
-        holder.shopAddress.setText(ratingModelList.get(position).getShopAddress());
-        holder.socialRating.setText(String.valueOf(ratingModelList.get(position).getSocialDistancing()));
-        holder.sanitRating.setText(String.valueOf(ratingModelList.get(position).getShopSanitation()));
-        holder.maskRating.setText(String.valueOf(ratingModelList.get(position).getMaskUse()));
+        holder.shopName.setText(ratingModelList.get(position).getShop_name());
+        holder.shopAddress.setText(ratingModelList.get(position).getShop_address());
+        holder.socialRating.setText(String.valueOf(ratingModelList.get(position).getSocial_distancing()));
+        holder.sanitRating.setText(String.valueOf(ratingModelList.get(position).getShop_sanitization()));
+        holder.maskRating.setText(String.valueOf(ratingModelList.get(position).getMask_use()));
         boolean isExpanded = ratingModelList.get(position).isExpanded();
         holder.layout.setVisibility(isExpanded? View.VISIBLE:View.GONE);
     }
@@ -92,8 +92,8 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.ViewHolder
 
             confirm.setOnClickListener(view -> {
                   if (sanR !=0.0 && maskR!=0.0 && socialR!=0.0){
-                    recyclerViewClick.onItemClick(getAdapterPosition(),sanR,maskR,socialR,ratingModelList.get(getAdapterPosition()).getShopName(),ratingModelList
-                    .get(getAdapterPosition()).getShopAddress());
+                    recyclerViewClick.onItemClick(getAdapterPosition(),sanR,maskR,socialR,ratingModelList.get(getAdapterPosition()).getShop_name(),ratingModelList
+                    .get(getAdapterPosition()).getShop_address());
                 }
             });
             cancel.setOnClickListener(view -> {

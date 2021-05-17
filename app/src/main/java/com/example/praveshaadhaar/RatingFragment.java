@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +37,7 @@ public class RatingFragment extends Fragment implements RecyclerViewClick {
     private RatingAdapter ratingAdapter;
     private RecyclerView recyclerView;
     private ProgressDialog dialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,19 +48,22 @@ public class RatingFragment extends Fragment implements RecyclerViewClick {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rating, container, false);
         recyclerView = view.findViewById(R.id.rv_rating);
-        dialog=new ProgressDialog(getContext());
-        dialog.setMessage("Loading...");
-        dialog.show();
+        dialog = new ProgressDialog(getContext());
+       // dialog.setMessage("Loading...");
+       // dialog.show();
         getresponse();
         return view;
     }
 
     private void getresponse() {
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://demo3828045.mockable.io/")
+                .baseUrl("https://majorproject4.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
@@ -69,7 +74,7 @@ public class RatingFragment extends Fragment implements RecyclerViewClick {
             public void onResponse(Call<List<RatingModel>> call, Response<List<RatingModel>> response) {
                 dialog.dismiss();
                 ratingModel = new ArrayList<>(response.body());
-                Log.e("tag",""+response.code());
+                Log.e("tag", "" + response.body());
                 Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 ratingAdapter = new RatingAdapter(ratingModel, getContext(), RatingFragment.this);
@@ -89,27 +94,33 @@ public class RatingFragment extends Fragment implements RecyclerViewClick {
 
     @Override
     public void onItemClick(int position, float san, float mask, float dist, String shopName, String shopAddress) {
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://demo9608891.mockable.io/")
+                .baseUrl("https://majorproject4.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        AddRating addRating= new AddRating("123",String.valueOf(san),String.valueOf(dist),shopName,shopAddress,String.valueOf(mask),"No");
+        long sanit = (long) san;
+        long masks = (long ) mask;
+        AddRating addRating = new AddRating(Long.parseLong("9988776655"),sanit,String.valueOf(dist),shopName,shopAddress,masks,"no");
         Call<AddRating> call = apiInterface.sendRating(addRating);
         call.enqueue(new Callback<AddRating>() {
             @Override
             public void onResponse(Call<AddRating> call, Response<AddRating> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Review added", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<AddRating> call, Throwable t) {
-                Toast.makeText(getContext(), ""+t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("tag",""+t.getMessage());
+                Toast.makeText(getContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("tag", "" + t.getMessage());
             }
         });
     }
